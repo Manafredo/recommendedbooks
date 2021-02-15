@@ -5,7 +5,7 @@
 </script>
 
 <style  global>
-  @import "../assets/global.css";
-</style>
+  @import url("https://use.typekit.net/cal1lzu.css");
+  </style>
 
 <Router {routes} />

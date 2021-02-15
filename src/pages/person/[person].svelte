@@ -2,6 +2,7 @@
     import Navigation from "../_Components/Navigation.svelte";
     import {onMount} from "svelte";
     import { params } from "@roxi/routify";
+import Booklist from "../_Components/booklist.svelte";
 
     let books =[];
     let person = [];
@@ -37,11 +38,13 @@
       name=person["0"]["fields"]["name"];
       description = person["0"]["fields"]["description"];
       comment = comments["0"]["fields"]["sourcedescription"];
+      id= person["0"]["sys"]["id"];
     });
     
 </script>
 
 <Navigation/>
+<Booklist id= "{id}"/>
 <main>
   <h2>{name}</h2>
   <p>{description}</p> 
