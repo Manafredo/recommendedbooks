@@ -4,8 +4,5 @@
 	
 </script>
 
-<style  global>
-  @import url("https://use.typekit.net/cal1lzu.css");
-  </style>
-
+<link rel="stylesheet" href="https://use.typekit.net/cal1lzu.css">
 <Router {routes} />

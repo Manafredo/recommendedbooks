@@ -13,10 +13,13 @@
         : persons;
   </script>
   
+  <link rel="stylesheet" href="https://use.typekit.net/cal1lzu.css">
   <style>
+    p,a {
+      font-family:"myriad-pro";
+    }
   </style>
-  
-  <main>
+
   <FilterCategories bind:filter/>
     <ul>
       {#each filterPersons(filter,persons) as person}
@@ -24,4 +27,3 @@
           <p>{person["fields"]["description"]}</p>
       {/each}
     </ul>
-  </main>

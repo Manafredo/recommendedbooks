@@ -42,9 +42,13 @@ import Booklist from "../_Components/booklist.svelte";
     });
     
 </script>
-
+<link rel="stylesheet" href="https://use.typekit.net/cal1lzu.css">
+<style>
+  p {
+    font-family:"myriad-pro";
+  }
+</style>
 <Navigation/>
-<Booklist id= "{id}"/>
 <main>
   <h2>{name}</h2>
   <p>{description}</p> 
