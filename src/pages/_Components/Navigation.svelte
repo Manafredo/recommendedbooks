@@ -9,11 +9,6 @@
       ['./contact', 'Contact']
     ]
   </script>
-  
-  <style>
-    .active {font-weight: bold}
-  </style>
-  
   <ul>
     {#each links as [path, name]}
       <!-- Svelte magic. If isActive is true, the "active" class is applied. -->
