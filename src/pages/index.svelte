@@ -13,8 +13,6 @@
       persons =  persons.items;
     });
   </script>
-  
-  <style>
-  </style>
+
   <Navigation/>
   <Persons {persons}/>
