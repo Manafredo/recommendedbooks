@@ -1,12 +1,13 @@
 <script>
     import Navigation from "../_Components/Navigation.svelte";
     import {onMount} from "svelte";
-    import { params } from "@roxi/routify";
+    import { params, goto } from "@roxi/routify";
 
     let books =[];
     let person = [];
     let bookarr =[];
     let commentarr=[];
+    let booksWithComments=[];
 
     let name;
     let description;
@@ -29,9 +30,9 @@
       books=books.items;
       for (let i=0; i<books.length; i++){
         let obj = books[i];
-        bookarr.push([obj.sys.id, obj.fields.title])
+        bookarr.push({id: obj.sys.id, title: obj.fields.title, description: obj.fields.description})
       }
-      console.log(bookarr);
+      //console.log(bookarr);
 
       const response3 = await fetch("https://cdn.contentful.com/spaces/t170cpyn3oju/environments/master/entries/?content_type=personBook&include=2&fields.person.sys.id="+person["0"]["sys"]["id"]+"&access_token=MFnR8m8akJLpWiIGbewXZi_PgdWJ0lWv46tjhf7g4uU"
       );
@@ -39,9 +40,12 @@
       comments=comments.items;
       for (let i=0; i<comments.length; i++){
         let obj = comments[i];
-        commentarr.push([obj.fields.book.sys.id, obj.fields.sourcedescription])
+        commentarr.push({id: obj.fields.book.sys.id, sourcedescription: obj.fields.sourcedescription})
       }
-      console.log(commentarr);
+      //console.log(commentarr);
+      booksWithComments=bookarr.map(t1 => ({...t1, ...commentarr.find(t2=>t2.id===t1.id)}));
+      //console.log(booksWithComments);
+
     });
     
 </script>
@@ -56,10 +60,13 @@
   <h2>{name}</h2>
   <p>{description}</p> 
     <ul>
-      {#each books as book}
-          <h2>{book["fields"]["title"]}</h2>
-          <p>{book["fields"]["description"]}</p>
-          <p>Source: {commentarr}</p>
+      {#each booksWithComments as book}
+          <a href={"http://localhost:5000/buch/" + book.title}>{book.title}</a>
+          <p>{book.description}</p>
+          <p>Source: {book.sourcedescription}</p>
+      {:else}
+      <!-- this block renders when book.length === 0 -->
+      <p>loading...</p>
       {/each}
     </ul>
   </main>
