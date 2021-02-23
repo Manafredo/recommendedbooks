@@ -1,7 +1,28 @@
-version: 2.1
-orbs:
-  node: circleci/node@3.0.0
+version: 2
+jobs:
+  deploy:
+    docker:
+      - image: circleci/node:8-browsers
+ 
+    working_directory: ~/repo
+ 
+    steps:
+      - checkout
+      - run: npm install
+      - run: 
+          name: Deploy Master Branch
+          command: |
+            sudo apt-get update
+            sudo apt-get -qq install git-ftp
+            echo "Deploying project ..."
+            git ftp push --user "${username}" --passwd "${password}" ${ftp_location}
+
+ 
 workflows:
-  node-tests:
+  version: 2
+  master-deploy:
     jobs:
-      - node/test
+      - deploy:
+          filters:
+            branches:
+              only: master
